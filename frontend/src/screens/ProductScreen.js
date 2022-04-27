@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useContext, useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
+// import Card from 'react-bootstrap/Card';
+// import ListGroup from 'react-bootstrap/ListGroup';
+// import Button from "react-bootstrap/Button";
 import Badge from 'react-bootstrap/Badge';
-import Button from "react-bootstrap/esm/Button";
 import { Helmet } from "react-helmet-async";
 import MessageBox from "../components/MessageBox";
 import LoadingBox from "../components/LoadingBox";
@@ -28,7 +28,7 @@ const reducer = (state, action) => {
     }
 }
 function ProductScreen() {
-    const navigate =useNavigate();
+    const navigate = useNavigate();
     const params = useParams();
     const { slug } = params;
     const [{ loading, error, product }, dispatch] = useReducer(reducer, {
@@ -73,64 +73,64 @@ function ProductScreen() {
         )
             :
             <div>
-                <Row>
-                    <Col md={6}>
+                <div className='row'>
+                    <div className="col-md-6">
                         <img className="img-large" src={product.image} alt={product.name}></img>
-                    </Col>
-                    <Col md={3}>
-                        <ListGroup variant="flush">
-                            <ListGroup.Item>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="list-group flush">
+                            <div className="list-group-item">
                                 <Helmet>
                                     <title>{product.name}</title>
                                 </Helmet>
                                 <h1>{product.name}</h1>
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                <Row>
-                                    <Col>Price:</Col>
-                                    <Col>${product.price}</Col>
-                                </Row>
-                            </ListGroup.Item>
-                            <ListGroup.Item>
+                            </div>
+                            <div className="list-group-item">
+                                <div className='row'>
+                                    <div className="col">Price:</div>
+                                    <div className="col">${product.price}</div>
+                                </div>
+                            </div>
+                            <div className="list-group-item">
                                 <p>{product.description}</p>
-                            </ListGroup.Item>
-                        </ListGroup>
-                    </Col>
-                    <Col md={3}>
-                        <Card>
-                            <Card.Body>
-                                <ListGroup variant="flush">
-                                    <ListGroup.Item>
-                                        <Row>
-                                            <Col>Price:</Col>
-                                            <Col>${product.price}</Col>
-                                        </Row>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item>
-                                        <Row>
-                                            <Col>Status:</Col>
-                                            <Col>{product.countInStock > 0 ?
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="list-group flush">
+                                    <div className="list-group-item">
+                                        <div className='row'>
+                                            <div className="col">Price:</div>
+                                            <div className="col">${product.price}</div>
+                                        </div>
+                                    </div>
+                                    <div className="list-group-item">
+                                        <div className='row'>
+                                            <div className="col">Status:</div>
+                                            <div className="col">{product.countInStock > 0 ?
                                                 <Badge bg="success">In Stock</Badge>
                                                 :
                                                 <Badge bg="danger">Unavailable</Badge>
-                                            }</Col>
-                                        </Row>
-                                    </ListGroup.Item>
+                                            }</div>
+                                        </div>
+                                    </div>
 
                                     {product.countInStock > 0 && (
-                                        <ListGroup.Item>
+                                        <div className="list-group-item">
                                             <div className="d-grid">
-                                                <Button onClick={addToCartHandler} variant="primary">
+                                                <button type="button" class="btn btn-primary" onClick={addToCartHandler}>
                                                     Add to Cart
-                                                </Button>
+                                                </button>
                                             </div>
-                                        </ListGroup.Item>
+                                        </div>
                                     )}
-                                </ListGroup>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
     );
 }

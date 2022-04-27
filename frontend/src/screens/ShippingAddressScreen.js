@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+// import Button from 'react-bootstrap/Button';
+// import Form from 'react-bootstrap/Form';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 
 function ShippingAddressScreen() {
-const navigate=useNavigate();
-const {state}=useContext(Store);
+    const navigate = useNavigate();
+    const { state } = useContext(Store);
 
-const {userInfo,}=state;
+    const { userInfo, } = state;
 
     const [fullName, setFullName] = useState('');
     const [address, setAddress] = useState('');
@@ -18,11 +18,11 @@ const {userInfo,}=state;
     const submitHandler = (e) => {
         e.preventDefault();
     }
-    useEffect(()=>{
-        if(!userInfo){
+    useEffect(() => {
+        if (!userInfo) {
             navigate('/signin');
         }
-    },[userInfo,navigate])
+    }, [userInfo, navigate])
     return (
         <div>
             <Helmet>
@@ -30,46 +30,47 @@ const {userInfo,}=state;
             </Helmet>
             <div className='container small-container'>
                 <h1 className="my-3">Shipping Address</h1>
-                <Form onSubmit={submitHandler}>
-                    <Form.Group className="mb-3" controlId="fullName">
-                        <Form.Label>Full Name</Form.Label>
-                        <Form.Control
+                <form onSubmit={submitHandler}>
+                    <div className="form-group mb-3" controlId="fullName">
+                        <label>Full Name</label>
+                        <input class="form-control"
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
                             required
                         />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="address">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control
+                    </div>
+                    <div className="form-group mb-3" controlId="address">
+                        <label>Address</label>
+                        <input class="form-control"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             required
                         />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="city">
-                        <Form.Label>City</Form.Label>
-                        <Form.Control
+                    </div>
+                    <div className="form-group mb-3" controlId="city">
+                        <label>City</label>
+                        <input class="form-control"
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             required
                         />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="postalCode">
-                        <Form.Label>Postal Code</Form.Label>
-                        <Form.Control
+                    </div>
+                    <div className="form-group mb-3" controlId="postalCode">
+                        <label>Postal Code</label>
+                        <input class="form-control"
                             value={postalCode}
                             onChange={(e) => setPostalCode(e.target.value)}
                             required
                         />
-                    </Form.Group>
-                    
-                    <div className="mb-3">
-                        <Button variant="primary" type="submit">
-                            Continue
-                        </Button>
                     </div>
-                </Form>
+
+                    <div className="mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            Continue
+                        </button>
+
+                    </div>
+                </form>
             </div>
 
         </div>

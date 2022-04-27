@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+// import Container from 'react-bootstrap/Container';
+// import Form from 'react-bootstrap/Form';
+// import Button from 'react-bootstrap/Button';
 import { Helmet } from 'react-helmet-async';
 import Axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
@@ -26,7 +26,7 @@ export default function SignupScreen() {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        if(password!==confirmPassword){
+        if (password !== confirmPassword) {
             toast.error('Passwords do not match');
             return;
         }
@@ -50,36 +50,38 @@ export default function SignupScreen() {
     }, [navigate, redirect, userInfo]);
 
     return (
-        <Container className="small-container">
+        <div className="container small-container">
             <Helmet>
                 <title>Sign Up</title>
             </Helmet>
             <h1 className="my-3">Sign Up</h1>
-            <Form onSubmit={submitHandler}>
-                <Form.Group className="mb-3" controlID="name">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control onChange={(e) => setName(e.target.value)} required />
-                </Form.Group>
-                <Form.Group className="mb-3" controlID="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" required onChange={(e) => setEmail(e.target.value)} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlID="password">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" required onChange={(e) => setPassword(e.target.value)} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlID="confirmpassword">
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control type="password" required onChange={(e) => setConfirmPassword(e.target.value)} />
-                </Form.Group>
+            <form onSubmit={submitHandler}>
+                <div className="form-group mb-3" controlID="name">
+                    <label>Name</label>
+                    <input class="form-control"  onChange={(e) => setName(e.target.value)} required />
+                </div>
+                <div className="form-group mb-3" controlID="email">
+                    <label>Email</label>
+                    <input class="form-control"  type="email" required onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <div className="form-group mb-3" controlID="password">
+                    <label>Password</label>
+                    <input class="form-control"  type="password" required onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <div className="form-group mb-3" controlID="confirmpassword">
+                    <label>Confirm Password</label>
+                    <input class="form-control"  type="password" required onChange={(e) => setConfirmPassword(e.target.value)} />
+                </div>
                 <div className="mb-3">
-                    <Button type="submit">Sign Up</Button>
+                    <button type="submit" className="btn btn-primary">
+                        Sign Up
+                    </button>
                 </div>
                 <div className="mb-3">
                     Already have an account?{' '}
                     <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
                 </div>
-            </Form>
-        </Container>
+            </form>
+        </div>
     )
 }

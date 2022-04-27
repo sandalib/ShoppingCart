@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
@@ -37,9 +37,16 @@ function Product(props) {
                     </Card.Title>
                 </Link>
                 <Card.Text>${product.price}</Card.Text>
-                {product.countInStock===0? <Button variant='light' disabled>Out of stock</Button>
-                :<Button onClick={()=>addToCartHandler(product)}>Add to cart</Button>}
-               
+                {product.countInStock === 0 ?
+                    <button type="submit" className="btn btn-light" disabled>
+                        Out of stock
+                    </button>
+                    :
+                    <button type="submit" className="btn btn-primary" onClick={() => addToCartHandler(product)}>
+                        Add to cart
+                    </button>
+                }
+
             </Card.Body>
         </Card>);
 }

@@ -1,8 +1,8 @@
 import { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
 import Product from '../components/Product';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
@@ -57,13 +57,13 @@ function HomeScreen() {
             ) : error ? (
                 <MessageBox variant="danger">{error}</MessageBox >
             ) : (
-                <Row>
+                <div className="row">
                     {products.map((product) => (
-                        <Col key={product.slug} sm={6} md={4} lg={3}>
+                        <div className="col-sm-6 col-md-4 col-lg-3" key={product.slug}>
                             <Product product={product}></Product>
-                        </Col>
+                        </div>
                     ))}
-                </Row>
+                </div>
             )}
         </div></div>)
 }

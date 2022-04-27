@@ -1,17 +1,17 @@
 import { useContext } from 'react';
 import { Store } from '../Store';
 import { Helmet } from 'react-helmet-async';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import MessageBox from '../components/MessageBox';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
+// import MessageBox from '../components/MessageBox';
+// import ListGroup from 'react-bootstrap/ListGroup';
+// import Button from 'react-bootstrap/Button';
+// import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function CartScreen() {
-    const navigate =useNavigate();
+    const navigate = useNavigate();
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const {
         cart: { cartItems },
@@ -29,16 +29,16 @@ export default function CartScreen() {
         });
     };
 
-const removeItemHandler=(item)=>{
-    ctxDispatch({
-        type: 'CART_REMOVE_ITEM',
-        payload: item
-    });
-};
+    const removeItemHandler = (item) => {
+        ctxDispatch({
+            type: 'CART_REMOVE_ITEM',
+            payload: item
+        });
+    };
 
-const checkoutHandler=()=>{
-    navigate('/signin?redirect=/shipping');
-};
+    const checkoutHandler = () => {
+        navigate('/signin?redirect=/shipping');
+    };
 
     return (
         <div>
@@ -46,77 +46,75 @@ const checkoutHandler=()=>{
                 <title>Your Cart</title>
             </Helmet>
             <h1>Your Cart</h1>
-            <Row>
-                <Col md={8}>
+            <div className='row'>
+                <div className='col-md-8'>
                     {cartItems.length === 0 ? (
-                        <MessageBox>
+                        <div className='MessageBox'>
                             Cart is empty <Link to="/">Go Shopping</Link>
-                        </MessageBox>
+                        </div>
                     ) : (
-                        <ListGroup>
+                        <div className="list-group">
                             {cartItems.map((item) => (
-                                <ListGroup.Item key={item._id}>
-                                    <Row className='align-item-center'>
-                                        <Col md={4}>
+                                <div className="list-group-item" key={item._id}>
+                                    <div className='align-item-center row'>
+                                        <div className='col-md-4'>
                                             <img
                                                 src={item.image}
                                                 alt={item.image}
                                                 className="img-fluid rounded img-thumbnail">
                                             </img>{' '}
                                             <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                                        </Col>
-                                        <Col md={3}>
-                                            <Button variant="light" onClick={() => updateCartHandler(item, item.quantity - 1)} disabled={item.quantity === 1}>
+                                        </div>
+                                        <div className='col-md-3 d-flex'>
+                                            <span><button class="btn btn-light" onClick={() => updateCartHandler(item, item.quantity - 1)} disabled={item.quantity === 1}>
                                                 <i className='fas fa-minus-circle'></i>
-                                            </Button>{' '}
+                                            </button></span>{' '}
                                             <span>{item.quantity}</span>{' '}
-                                            <Button variant="light" onClick={() => updateCartHandler(item, item.quantity + 1)} disabled={item.quantity === item.countInStock}>
+                                            <span><button class="btn btn-light" onClick={() => updateCartHandler(item, item.quantity + 1)} disabled={item.quantity === item.countInStock}>
                                                 <i className='fas fa-plus-circle'></i>
-                                            </Button>
-                                        </Col>
-                                        <Col md={3}>
+                                            </button></span>
+                                        </div>
+                                        <div className='col-md-3'>
                                             ${item.price}
-                                        </Col>
-                                        <Col md={2}>
-                                            <Button onClick={()=> removeItemHandler(item)} variant="light">
+                                        </div>
+                                        <div className='col-md-2'>
+                                            <span type="button" class="btn" onClick={() => removeItemHandler(item)} variant="light">
                                                 <i className='fas fa-trash'></i>
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </ListGroup.Item>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             ))}
-                        </ListGroup>
+                        </div>
                     )}
-                </Col>
-                <Col md={4}>
-                    <Card>
-                        <Card.Body>
-                            <ListGroup variant='flush'>
-                                <ListGroup.Item>
+                </div>
+                <div className='col-md-4'>
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="list-group flush">
+                                <div className="list-group-item">
                                     <h3>
                                         Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
                                         items):
                                         $
                                         {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                                     </h3>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
+                                </div>
+                                <div className="list-group-item">
                                     <div className='d-grid'>
-                                        <Button
-                                            type="button"
-                                            variant="primary"
+                                        <button type="button" class="btn btn-primary"
                                             onClick={checkoutHandler}
                                             disabled={cartItems.length === 0}
                                         >
                                             Proceed to Checkout
-                                        </Button>
+                                        </button>
                                     </div>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
