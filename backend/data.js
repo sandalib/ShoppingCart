@@ -1,59 +1,59 @@
 import bcrypt from 'bcryptjs';
 
 const data = {
-    users:[
+    users: [
         {
-            name:'San',
-            email:'admin@example.com',
-            password:bcrypt.hashSync('12345'),
-            isAdmin:true,
+            name: 'San',
+            email: 'admin@example.com',
+            password: bcrypt.hashSync('12345'),
+            isAdmin: true,
         },
         {
-            name:'Red',
-            email:'user@example.com',
-            password:bcrypt.hashSync('12345'),
-            isAdmin:false,
+            name: 'Red',
+            email: 'user@example.com',
+            password: bcrypt.hashSync('12345'),
+            isAdmin: false,
         }
     ],
     products: [
         {
-            name: 'Nike Slim Shirt',
-            slug: 'nike-slim-shirt',
-            category: 'Shirt',
+            name: 'Maroon Party Dress',
+            slug: 'maroon-party-dress',
+            category: 'Dress',
             image: '/images/p1.jpg',
             price: 120,
             countInStock: 10,
-            brand: 'Nike',
-            description: 'high quality shirt',
+            brand: 'BrandName',
+            description: 'high quality product',
         },
         {
-            name: 'Adidas Slim Shirt',
-            slug: 'adidas-slim-shirt',
-            category: 'Shirt',
+            name: 'Pink Party Dress',
+            slug: 'pink-party-dress',
+            category: 'Dress',
             image: '/images/p2.jpg',
             price: 250,
             countInStock: 20,
-            brand: 'Adidas',
+            brand: 'BrandName',
             description: 'high quality product',
-        },{
-            name: 'Nike Fit Pants',
-            slug: 'nike-fit-pants',
-            category: 'Pants',
+        }, {
+            name: 'Purple Party Dress',
+            slug: 'purple-party-dress',
+            category: 'Long Dress',
             image: '/images/p3.jpg',
             price: 55,
             countInStock: 15,
-            brand: 'Nike',
+            brand: 'BrandName',
             description: 'high quality product',
         }, {
-            name: 'Adidas Fit Pants',
-            slug: 'adidas-fit-pants',
-            category: 'Pants',
+            name: 'Off Shoulder Dress',
+            slug: 'off-shoulder-dress',
+            category: 'Dress',
             image: '/images/p4.jpg',
             price: 65,
             countInStock: 0,
-            brand: 'Adidas',
+            brand: 'BrandName',
             description: 'high quality product',
-        }    
+        }
     ]
 };
 export default data;

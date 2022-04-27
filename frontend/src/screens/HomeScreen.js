@@ -68,4 +68,4 @@ function HomeScreen() {
         </div></div>)
 }
 
-export default HomeScreen
+export default HomeScreen;
