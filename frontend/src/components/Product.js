@@ -1,4 +1,4 @@
-import Card from 'react-bootstrap/Card';
+// import Card from 'react-bootstrap/Card';
 // import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -26,17 +26,17 @@ function Product(props) {
     };
 
     return (
-        <Card>
+        <div className="card">
             <Link to={`/product/${product.slug}`}>
                 <img src={product.image} className="card-img-top" alt={product.name} />
             </Link>
-            <Card.Body>
+            <div className="card-body">
                 <Link to={`/product/${product.slug}`}>
-                    <Card.Title>
+                    <h4 className='card-title'>
                         {product.name}
-                    </Card.Title>
+                    </h4>
                 </Link>
-                <Card.Text>${product.price}</Card.Text>
+                <h5 className='card-text'>${product.price}</h5>
                 {product.countInStock === 0 ?
                     <button type="submit" className="btn btn-light" disabled>
                         Out of stock
@@ -47,8 +47,8 @@ function Product(props) {
                     </button>
                 }
 
-            </Card.Body>
-        </Card>);
+            </div>
+        </div>);
 }
 
 export default Product;
