@@ -38,3 +38,6 @@ main {
 .img-large {
   max-width: 90%;
 }
+.text-decoration-none {
+  text-decoration: none;
+}

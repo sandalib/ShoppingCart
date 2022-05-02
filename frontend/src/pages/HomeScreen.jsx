@@ -1,19 +1,6 @@
 import React, { useEffect, useState } from 'react';
-// import data from '../data';
 import axios from 'axios';
-
-// const reducer = (state, action) => {
-//   switch (action.type) {
-//       case 'FETCH_REQUEST':
-//           return { ...state, loading: true };
-//       case 'FETCH_SUCCESS':
-//           return { ...state, products: action.payload, loading: false };
-//       case 'FETCH_FAIL':
-//           return { ...state, loading: false, error: action.payload };
-//       default:
-//           return state;
-//   }
-// }
+import { Link } from 'react-router-dom';
 
 function HomeScreen() {
   const [products, setProducts] = useState([]);
@@ -31,17 +18,17 @@ function HomeScreen() {
         {products.map((product) => (
           <div className="col-sm-6 col-md-4 col-lg-3" key={product.slug}>
             <div className="product">
-              <a href={`/product/${product.slug}`}>
+              <Link to={`/product/${product.slug}`}>
                 <img src={product.image} alt={product.name} />
-              </a>
+              </Link>
               <div className="product-info text-decoration-none">
-                <a href={`/product/${product.slug}`}>
-                  <p>{product.name}</p>
-                </a>
+                <Link to={`/product/${product.slug}`}>
+                  <h4>{product.name}</h4>
+                </Link>
                 <p>
                   <strong>LKR {product.price}</strong>
                 </p>
-                <button>Add to cart</button>
+                <button className="btn btn-primary">Add to cart</button>
               </div>
             </div>
           </div>

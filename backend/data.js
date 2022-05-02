@@ -6,7 +6,7 @@ const data = {
             price: 6500,
             description: 'High quality Product',
             image: '/images/p1.jpg',
-            countInSrock: 12
+            countInStock: 12
         },
         {
             name: 'Pink Dress',

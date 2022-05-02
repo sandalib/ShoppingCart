@@ -1,16 +1,15 @@
 import React, { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-// import data from '../data';
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
-      return { ...state, loading: true };
+      return { ...state };
     case 'FETCH_SUCCESS':
-      return { ...state, product: action.payload, loading: false };
+      return { ...state, product: action.payload };
     case 'FETCH_FAIL':
-      return { ...state, loading: false, error: action.payload };
+      return { ...state };
     default:
       return state;
   }
@@ -70,25 +69,23 @@ function ProductScreen() {
                 <div className="list-group-item">
                   <div className="row">
                     <div className="col">Status:</div>
-                    {/* <div className="col">
+                    <div className="col">
                       {product.countInStock > 0 ? (
-                        <span className="badge badge-success">In Stock</span>
+                        <div className="badge bg-success">In stock</div>
                       ) : (
-                        <span className="badge badge-danger">Unavailable</span>
+                        <div className="badge bg-danger">Out of stock</div>
                       )}
-                    </div> */}
+                    </div>
                   </div>
                 </div>
 
-                {/* {product.countInStock > 0 && (
+                {product.countInStock > 0 && (
                   <div className="list-group-item">
                     <div className="d-grid">
-                      <input type="button" class="btn btn-primary">
-                        Add to Cart
-                      </input>
+                      <button className="btn btn-primary">Add to cart</button>
                     </div>
                   </div>
-                )} */}
+                )}
               </div>
             </div>
           </div>

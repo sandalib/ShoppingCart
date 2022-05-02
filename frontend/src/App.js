@@ -11,13 +11,13 @@ function App() {
         <header className="nav bg-dark navbar-dark">
           <span className='col-md-1'></span>
           <Link className='navbar-brand' to='/' >Shopping Cart</Link>
-          <Link to='/cart' className='nav-item nav-link navbar-dark'>Cart</Link>
+          <Link to='/cart' className='nav-item nav-link'>Cart</Link>
 
         </header>
         <main>
           <div className="container mt-3">
             <Routes>
-              <Route path="/product/:slug" element={<ProductScreen />}></Route>
+              <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>
