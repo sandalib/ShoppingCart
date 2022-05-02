@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import HomeScreen from './pages/HomeScreen';
 import CartScreen from './pages/CartScreen';
 import ProductScreen from './pages/ProductScreeen';
+import { Store } from './Store';
 
 function App() {
+  const { state } = useContext(Store);
+  const { cart } = state;
   return (
     <BrowserRouter>
       <div>
         <header className="nav bg-dark navbar-dark">
           <span className='col-md-1'></span>
           <Link className='navbar-brand' to='/' >Shopping Cart</Link>
-          <Link to='/cart' className='nav-item nav-link'>Cart</Link>
+          <div className='nav me-auto'>
+            <Link to='/cart' className='nav-item nav-link'>Cart
+              {cart.cartItems.length > 0 && (
+                <div className='badge bg-pill bg-danger'>
+                  {cart.cartItems.length}
+                </div>
+              )}
+            </Link>
+          </div>
+
 
         </header>
         <main>

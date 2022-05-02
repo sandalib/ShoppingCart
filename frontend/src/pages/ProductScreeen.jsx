@@ -1,15 +1,16 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Store } from '../Store';
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
-      return { ...state };
+      return { ...state, loading: true };
     case 'FETCH_SUCCESS':
-      return { ...state, product: action.payload };
+      return { ...state, product: action.payload, loading: false };
     case 'FETCH_FAIL':
-      return { ...state };
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
@@ -18,7 +19,9 @@ const reducer = (state, action) => {
 function ProductScreen() {
   const params = useParams();
   const { slug } = params;
-  const [{ product }, dispatch] = useReducer(reducer, {
+  const [{ loading, error, product }, dispatch] = useReducer(reducer, {
+    loading: false,
+    error: '',
     product: [],
   });
   useEffect(() => {
@@ -34,7 +37,19 @@ function ProductScreen() {
     fetchData();
   }, [slug]);
 
-  return (
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const addToCartHandler = () => {
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...product, quantity: 1 },
+    });
+  };
+
+  return loading ? (
+    <div>Loading...</div>
+  ) : error ? (
+    <div className="alert alert-danger">{error}</div>
+  ) : (
     <div>
       <div className="row">
         <div className="col-md-6">
@@ -82,7 +97,12 @@ function ProductScreen() {
                 {product.countInStock > 0 && (
                   <div className="list-group-item">
                     <div className="d-grid">
-                      <button className="btn btn-primary">Add to cart</button>
+                      <button
+                        className="btn btn-primary"
+                        onClick={addToCartHandler}
+                      >
+                        Add to cart
+                      </button>
                     </div>
                   </div>
                 )}
