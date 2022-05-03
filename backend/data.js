@@ -1,6 +1,7 @@
 const data = {
     products: [
         {
+            _id: '1',
             name: 'Maroon Dress',
             slug: 'maroon-dress',
             price: 6500,
@@ -9,6 +10,7 @@ const data = {
             countInStock: 12
         },
         {
+            _id: '2',
             name: 'Pink Dress',
             slug: 'pink-dress',
             price: 7500,
@@ -17,6 +19,7 @@ const data = {
             countInStock: 5
         },
         {
+            _id: '3',
             name: 'Purple Dress',
             slug: 'purple-dress',
             price: 4500,
@@ -25,6 +28,7 @@ const data = {
             countInStock: 0
         },
         {
+            _id: '4',
             name: 'White Dress',
             slug: 'wihite-dress',
             price: 5500,
