@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import MessageBox from '../components/MessagBox';
@@ -8,6 +9,23 @@ function CartScreen() {
   const {
     cart: { cartItems },
   } = state;
+  const updateCartHandler = async (item, quantity) => {
+    const { data } = await axios.get(`/api/products/${item._id}`);
+    if (data.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock');
+      return;
+    }
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...item, quantity },
+    });
+  };
+  const removeItemHandler = (item) => {
+    ctxDispatch({
+      type: 'CART_REMOVE_ITEM',
+      payload: item,
+    });
+  };
   return (
     <div>
       <h1>Your cart</h1>
@@ -35,6 +53,9 @@ function CartScreen() {
                         <button
                           class="btn btn-light"
                           disabled={item.quantity === 1}
+                          onClick={() =>
+                            updateCartHandler(item, item.quantity - 1)
+                          }
                         >
                           <br />
                           <i className="fas fa-minus-circle"></i>
@@ -47,6 +68,9 @@ function CartScreen() {
                       <span>
                         <button
                           class="btn btn-light"
+                          onClick={() =>
+                            updateCartHandler(item, item.quantity + 1)
+                          }
                           disabled={item.quantity === item.countInStock}
                         >
                           <br />
@@ -60,7 +84,11 @@ function CartScreen() {
                     </div>
                     <div className="col-md-2">
                       <br />
-                      <span type="button" class="btn btn-light">
+                      <span
+                        type="button"
+                        class="btn btn-light"
+                        onClick={() => removeItemHandler(item)}
+                      >
                         <i className="fas fa-trash"></i>
                       </span>
                     </div>
