@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import HomeScreen from './pages/HomeScreen';
 import CartScreen from './pages/CartScreen';
+import CheckoutScreen from './pages/CheckoutScreen';
 import ProductScreen from './pages/ProductScreeen';
 import { Store } from './Store';
 
@@ -31,6 +32,7 @@ function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
+              <Route path="/checkout" element={<CheckoutScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </div>

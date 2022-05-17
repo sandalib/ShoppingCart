@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MessageBox from '../components/MessagBox';
 import { Store } from '../Store';
 
 function CartScreen() {
+  const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
@@ -25,6 +26,9 @@ function CartScreen() {
       type: 'CART_REMOVE_ITEM',
       payload: item,
     });
+  };
+  const checkoutPage = () => {
+    navigate('/checkout');
   };
   return (
     <div>
@@ -116,6 +120,7 @@ function CartScreen() {
                     <button
                       type="button"
                       class="btn btn-primary"
+                      onClick={checkoutPage}
                       disabled={cartItems.length === 0}
                     >
                       Proceed to Checkout
