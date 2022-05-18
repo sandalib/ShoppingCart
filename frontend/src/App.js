@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import HomeScreen from './pages/HomeScreen';
 import CartScreen from './pages/CartScreen';
 import CheckoutScreen from './pages/CheckoutScreen';
@@ -12,6 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
+        <ToastContainer position='top-center' limit={1} />
         <header className="nav bg-dark navbar-dark">
           <span className='col-md-1'></span>
           <Link className='navbar-brand' to='/' >Shopping Cart</Link>

@@ -1,21 +1,38 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Axios from 'axios';
+import { Store } from '../Store';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { getError } from '../utils';
 
 export default function CheckoutScreen() {
+  const navigate = useNavigate();
   const [fname, setFName] = useState('');
   const [lname, setLName] = useState('');
   const [address, setAddress] = useState('');
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const {
+    cart: { cartItems },
+  } = state;
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await Axios.post('/api/users/', {
+      const addUser = Axios.post('/api/users/', {
         fname,
         lname,
         address,
       });
-      window.alert('Order added');
+      const addOrder = Axios.post('/api/orders/', {
+        cartItems,
+        fname,
+        lname,
+      });
+      await Promise.all([addUser, addOrder]);
+      ctxDispatch({ type: 'CLEAR_CART' });
+      navigate('/');
     } catch (err) {
-      window.alert(err);
+      toast.error(getError(err));
     }
   };
   return (

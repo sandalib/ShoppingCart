@@ -2,10 +2,13 @@ import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema(
     {
-        cartItems: { type: String, requred: true },
+        cartItems: [{
+            name: { type: String, requred: true },
+            quantity: { type: Number, requred: true },
+            price: { type: String, requred: true },
+        }],
         fname: { type: String, requred: true },
         lname: { type: String, requred: true },
-        address: { type: String, requred: true },
     },
     {
         timestamps: true
