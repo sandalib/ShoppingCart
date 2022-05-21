@@ -18,18 +18,18 @@ export default function CheckoutScreen() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const addUser = Axios.post('/api/users/', {
-        fname,
-        lname,
-        address,
-      });
+      // const addUser = Axios.post('/api/users/');
       const addOrder = Axios.post('/api/orders/', {
         cartItems,
-        fname,
-        lname,
+        customer: {
+          fname,
+          lname,
+          address,
+        },
       });
-      await Promise.all([addUser, addOrder]);
+      await Promise.all([addOrder]);
       ctxDispatch({ type: 'CLEAR_CART' });
+      toast.success('Order added successfully');
       navigate('/');
     } catch (err) {
       toast.error(getError(err));
